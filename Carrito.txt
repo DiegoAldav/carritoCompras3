@@ -1,0 +1,93 @@
+package carroDeCompras3;
+
+public class Carrito {
+
+    ItemCarrito[] items;
+    int fecha;
+
+    public Carrito() {}
+
+    public Carrito(ItemCarrito[] items) {
+        this.items = items;
+    }
+
+    public void setItems(ItemCarrito[] items) {
+        this.items = items;
+    }
+
+    public ItemCarrito[] getItems() {
+        return items;
+    }
+
+    public void setFecha(int fecha) {
+        this.fecha = fecha;
+    }
+
+    public int getFecha() {
+        return fecha;
+    }
+
+    public String getItemsNombre(int unIndex) {
+        return items[unIndex].getProductoNombre();
+    }
+
+    public int getItemsPrecio(int unIndex) {
+        return items[unIndex].getProductoPrecio();
+    }
+
+    public int getItemsCantidad(int unIndex) {
+        return items[unIndex].getCantidad();
+    }
+
+    public int getItemsCodigo(int unIndex) {return items[unIndex].getProductoCodigo();}
+
+
+
+    /*public Producto getProductoCodigo(int unCodigo) {
+
+        return producto;
+    }*/
+
+
+    public double calcularDescuento(int base, Descuento unDescuento) {
+        double descuentox = 0;
+        if (unDescuento.getTipo() == "%") {
+            descuentox = base * unDescuento.getPorcentajeSobre100();
+            return descuentox;
+         }
+         if (unDescuento.getTipo() == "fijo") {
+             descuentox = unDescuento.getMontoFijo();
+          return descuentox;
+         }
+
+        return descuentox;
+    }
+
+    public double calcularPrecioCarritoSinDescuento() {
+        int base = 0;
+        for (int i = 0; i < items.length; i++) {
+            base = base + items[i].precioCxP();
+        }
+        return base;
+    }
+
+    public double calcularPrecioCarritoDescItemsCargados( Descuento desc) {
+        int base = 0;
+        for (int i = 0; i < items.length; i++) {
+            base = base + items[i].precioCxP();
+        }
+        return base - calcularDescuento(base, desc);
+    }
+
+
+
+    public double calcularPrecioCarritoSinDatos(ItemCarrito items[], Descuento desc) {
+        int base = 0;
+        for (int i = 0; i < items.length; i++) {
+            base = base + items[i].precioCxP();
+        }
+        return base - calcularDescuento(base, desc);
+    }
+
+}
+

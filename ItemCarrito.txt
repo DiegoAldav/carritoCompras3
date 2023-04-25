@@ -1,0 +1,72 @@
+package carroDeCompras3;
+
+public class ItemCarrito {
+
+    int cantidad;
+    Producto producto;
+    Producto[] productos;
+
+    public ItemCarrito() {}
+
+    public ItemCarrito(int cantidad, Producto producto) {
+        this.cantidad = cantidad;
+        this.producto = producto;
+    }
+
+    public ItemCarrito(Producto[] productos) {
+        this.productos = productos;
+    }
+
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public String getProductoNombre() {
+        return producto.getNombre();
+    }
+
+    public int getProductoPrecio() {
+        return producto.getPrecio();
+    }
+
+    public int getProductoCodigo() {
+        return producto.getCodigo();
+    }
+
+    //////////////////////////////////
+    public Producto getProductoCodigo(int unCodigo) {
+        Producto producto = new Producto();
+        for (int i = 0; i < productos.length; i++) {
+            if (productos[i].getCodigo() == unCodigo) {
+                producto = productos[i];
+            }
+
+        }
+        return producto;
+    }
+
+    ////////////////////////////////
+
+
+    public int precioCxP() {
+        int precio1 = 0;
+        precio1 = cantidad * producto.getPrecio();
+        return precio1;
+    }
+
+
+}
+

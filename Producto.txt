@@ -1,0 +1,41 @@
+package carroDeCompras3;
+
+public class Producto {
+
+    String nombre;
+    int precio;
+    int codigo;
+
+    public Producto() {}
+
+    public Producto(String nombre, int precio,int codigo) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.codigo = codigo;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setPrecio(int precio) {
+        this.precio = precio;
+    }
+
+    public int getPrecio() {
+        return precio;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+}
+

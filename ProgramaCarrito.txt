@@ -1,0 +1,86 @@
+package Programa3;
+
+import carroDeCompras3.*;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+
+
+public class ProgramaCarrito {
+
+    public static void main(String[] args) throws Exception {
+
+    String archivo = "/home/mustafa/trabajos/carrito2/carrito2.csv";
+
+    File result = new File(archivo);
+    if (!result.exists()) {
+        System.out.println("no encuentra el archivo carrrito.csv\npuede que la direccion del archivo esta mal\no puede que el archivo no exista");
+        System.exit(0);
+    }
+
+    List<String> carritoCodigos = Files.readAllLines(Paths.get(archivo));
+
+    //Producto producto1 = new Producto("yerba", 420,21);
+    Producto producto2 = new Producto("leche", 260,22);
+    Producto producto3 = new Producto("azucar",310,23);
+    Producto[] listaProducto = new Producto[7];
+    listaProducto[0] = new Producto("yerba", 420,21);
+    listaProducto[1] = producto2;
+    listaProducto[2] = producto3;
+    listaProducto[3] = new Producto("chocolate",150,24);
+    listaProducto[4] = new Producto("jabon en polvo",550,25);
+    listaProducto[5] = new Producto("alfajores x 3",300,26);
+    listaProducto[6] = new Producto("rollo de cocina",350,27);
+
+    ItemCarrito xx = new ItemCarrito(listaProducto);
+    ItemCarrito[] items1 = new ItemCarrito[carritoCodigos.size()-1];
+
+
+    for (int i = 1; i < carritoCodigos.size(); i++) {
+        Producto producto ;//= new Producto();
+        String[] art = carritoCodigos.get(i).split(",");
+        int j = Integer.parseInt(art[0]);
+        int h = Integer.parseInt(art[1]);
+        producto = xx.getProductoCodigo(h);
+
+        items1[i-1] = new ItemCarrito(j, producto);
+    }
+
+    Carrito carrito1 = new Carrito();
+    carrito1.setItems(items1);
+
+    Descuento fijo1 = new Descuento();
+    fijo1.setTipo("fijo");
+    fijo1.setMontoFijo(250);
+
+    Descuento porcentaje2 = new Descuento();
+    porcentaje2.setTipo("%");
+    porcentaje2.setPorcentaje(15.0);
+
+    System.out.println("Producto: "+xx.getProductoCodigo(22).getNombre());
+    System.out.println(carrito1.getItemsNombre(0)+" "+carrito1.getItemsCantidad(0));
+    System.out.println(carrito1.getItemsNombre(1)+" "+carrito1.getItemsCantidad(1));
+    System.out.println(carrito1.getItemsNombre(2)+" "+carrito1.getItemsCantidad(2));
+
+    System.out.println("Total carrito 1 sin descuento: "+carrito1.calcularPrecioCarritoSinDescuento());
+    System.out.println("fijo: "+carrito1.calcularDescuento(2240,fijo1));
+    System.out.println("%: "+carrito1.calcularDescuento(2240,porcentaje2));
+    System.out.println("total carrito con descuento fijo: "+carrito1.calcularPrecioCarritoDescItemsCargados(fijo1));
+    System.out.println("total carrito con descuento %: "+carrito1.calcularPrecioCarritoDescItemsCargados(porcentaje2));
+    System.out.println();
+
+
+    //////////////////////////////////////////////////////////
+    //              tiket carrito de compras
+    System.out.println("------------------------------tiket compra----------------------------");
+    System.out.println("cant.  precioUnitario    producto");
+    for (int i = 0; i < carritoCodigos.size()-1; i++) {
+        System.out.println(carrito1.getItemsCantidad(i)+"      "+carrito1.getItemsPrecio(i)+"               "+carrito1.getItemsNombre(i));
+    }
+    System.out.println("       precio Total:  "+carrito1.calcularPrecioCarritoSinDescuento());
+    System.out.println("-------------------------gracias por su compra------------------------");
+
+    }
+}
+

@@ -1,0 +1,47 @@
+package carroDeCompras3;
+
+public class Descuento {
+
+    private String tipo;
+    private Double porcentaje;
+    private int montoFijo;
+
+    public Descuento() {}
+
+    public Descuento(String tipo, double porcentaje, int montoFijo) {
+        this.tipo = tipo;
+        this.porcentaje = porcentaje;
+        this.montoFijo = montoFijo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setMontoFijo(int montoFijo) {
+        this.montoFijo = montoFijo;
+    }
+
+    public int getMontoFijo() {
+        return montoFijo;
+    }
+
+    public void setPorcentaje(Double porcentaje) {
+        this.porcentaje = porcentaje;
+    }
+
+    public Double getPorcentaje() {
+        return porcentaje;
+    }
+
+    public Double getPorcentajeSobre100() {
+        return porcentaje/100;
+    }
+
+}
+
+
